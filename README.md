@@ -2,8 +2,11 @@
 Scripts to perform analysis of AWS Configs without using AWS API
 
 ░█─░█ ░█▀▀▀█ ─█▀▀█ ░█▀▀█ ░█▀▀▀ 
+
 ░█─░█ ─▀▀▀▄▄ ░█▄▄█ ░█─▄▄ ░█▀▀▀ 
+
 ─▀▄▄▀ ░█▄▄▄█ ░█─░█ ░█▄▄█ ░█▄▄▄
+
 
 1. Download Scripts
 2. Install Python 3
