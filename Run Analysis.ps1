@@ -1,6 +1,0 @@
-python '.\Security Groups Analysis.py'
-python '.\Subnet Analysis.py'
-python '.\ACL Analysis.py'
-python '.\Network Interfaces and addresses Analysis.py'
-python '.\Route Table Analysis.py'
-python '.\VPC Analysis.py'
