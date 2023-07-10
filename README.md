@@ -37,11 +37,11 @@ Security Groups					   : python '.\Security Groups Analysis.py'
 ░█─░█ ░█▄▄▄ ─▀▀█▄ ─▀▄▄▀ ▄█▄ ░█─░█ ░█▄▄▄ ░█▄▄▀   ░█─── ▄█▄ ░█▄▄█ ░█▄▄▄ ░█▄▄▄█
 
 1. AWS Configuration JSONs (Exported via AWS CLI)
-aws --output json ec2 describe_addresses 
-aws --output json ec2 describe_network_acls 
-aws --output json ec2 describe_network_interfaces 
-aws --output json ec2 describe_route_tables 
-aws --output json ec2 describe_security_groups 
-aws --output json ec2 describe_subnets 
-aws --output json ec2 describe_vpc_endpoints 
-aws --output json ec2 describe_vpcs 
+   aws --output json ec2 describe_addresses
+   aws --output json ec2 describe_network_acls
+   aws --output json ec2 describe_network_interfaces
+   aws --output json ec2 describe_route_tables
+   aws --output json ec2 describe_security_groups
+   aws --output json ec2 describe_subnets
+   aws --output json ec2 describe_vpc_endpoints
+   aws --output json ec2 describe_vpcs 
