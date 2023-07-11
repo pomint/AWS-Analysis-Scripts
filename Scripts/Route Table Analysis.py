@@ -19,7 +19,7 @@ def analyze_route_table_configuration(config_file):
 
             # Convert analysis results to a DataFrame using Pandas
             df = pd.DataFrame(analysis_results, columns=[
-                'Route Table ID', 'VPC ID', 'Route Table Name', 'Route Destination', 'Target', 'Status', 'Details', 'Recommendation'
+                'Route Table ID', 'VPC ID', 'Route Table Name', 'Route Destination', 'Target', 'Status', 'Details', 'Recommendation', 'Propagation', 'Blackhole'
             ])
 
             # Export DataFrame to an Excel file
@@ -41,9 +41,11 @@ def analyze_route_table(route_table_id, vpc_id, routes, name_tag_value, analysis
         instance_id = route.get('InstanceId')
         interface_id = route.get('NetworkInterfaceId')
         state = route.get('State')
-        analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance_id, interface_id, state, name_tag_value, analysis_results)
+        propagation = route.get('PropagatingVgws')
+        blackhole = route.get('Blackhole')
+        analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance_id, interface_id, state, propagation, blackhole, name_tag_value, analysis_results)
 
-def analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance_id, interface_id, state, name_tag_value, analysis_results):
+def analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance_id, interface_id, state, propagation, blackhole, name_tag_value, analysis_results):
     # Perform analysis on the route
     analysis = {}
 
@@ -53,6 +55,12 @@ def analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance
     analysis['Target'] = target
     analysis['Status'] = status
     analysis['Details'] = details
+
+    # Example: Analyze propagation
+    analysis['Propagation'] = analyze_propagation(propagation)
+
+    # Example: Analyze blackhole
+    analysis['Blackhole'] = analyze_blackhole(blackhole)
 
     # Generate recommendations based on the analysis
     recommendation = generate_recommendation(destination_cidr, target, status)
@@ -66,7 +74,9 @@ def analyze_route(route_table_id, vpc_id, destination_cidr, gateway_id, instance
         'Target': target,
         'Status': status,
         'Details': details,
-        'Recommendation': recommendation
+        'Recommendation': recommendation,
+        'Propagation': analysis['Propagation'],
+        'Blackhole': analysis['Blackhole']
     })
 
 def analyze_route_target(gateway_id, instance_id, interface_id):
@@ -93,6 +103,20 @@ def analyze_route_target(gateway_id, instance_id, interface_id):
         details = 'The route target is not defined.'
 
     return target, status, details
+
+def analyze_propagation(propagation):
+    # Example analysis logic for propagation
+    if propagation:
+        return 'Yes'
+    else:
+        return 'No'
+
+def analyze_blackhole(blackhole):
+    # Example analysis logic for blackhole
+    if blackhole:
+        return 'Yes'
+    else:
+        return 'No'
 
 def generate_recommendation(destination_cidr, target, status):
     # Example recommendation logic based on analysis
